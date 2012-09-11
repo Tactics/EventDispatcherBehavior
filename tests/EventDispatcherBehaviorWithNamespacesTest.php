@@ -44,6 +44,7 @@ EOF;
         $this->assertTrue(defined('My\Post::EVENT_POST_INSERT'));
         $this->assertTrue(defined('My\Post::EVENT_PRE_DELETE'));
         $this->assertTrue(defined('My\Post::EVENT_POST_DELETE'));
+        $this->assertTrue(defined('My\Post::EVENT_POST_HYDRATE'));
     }
 
     public function testGetDispatcher()

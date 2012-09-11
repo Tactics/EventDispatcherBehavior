@@ -19,7 +19,8 @@ class EventDispatcherObjectBuilderModifier
             'pre_save', 'post_save',
             'pre_update', 'post_update',
             'pre_insert', 'post_insert',
-            'pre_delete', 'post_delete'
+            'pre_delete', 'post_delete',
+            'post_hydrate'
         ) as $eventName) {
             $constant = strtoupper('EVENT_' . $eventName);
             $events[$constant] = $this->getEventName($eventName);
@@ -113,6 +114,13 @@ class EventDispatcherObjectBuilderModifier
         ));
     }
 
+    public function postHydrate()
+    {
+        return $this->behavior->renderTemplate('objectHook', array(
+            'eventName' => $this->getEventName('post_hydrate'),
+        ));
+    }
+    
     public function objectFilter(&$script)
     {
         $script = preg_replace('#(implements Persistent)#', '$1, EventDispatcherAwareModelInterface', $script);
